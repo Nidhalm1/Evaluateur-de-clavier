@@ -1,0 +1,40 @@
+{
+    "keyboardLayout": {
+      "layers": [
+        {
+          "name": "base",
+          "mappings": {
+            "K00": "a",
+            "K01": "z",
+            "K02": "e",
+            "K03": "r",
+            "K04": "t",
+            "K05": "y",
+            "K06": "u",
+            "K07": "i",
+            "K08": "o",
+            "K09": "p"
+          }
+        },
+        {
+          "name": "shift",
+          "mappings": {
+            "K00": "A",
+            "K01": "Z",
+            "K02": "E",
+            "K03": "R",
+            "K04": "T",
+            "K05": "Y",
+            "K06": "U",
+            "K07": "I",
+            "K08": "O",
+            "K09": "P"
+          }
+        }
+      ],
+      "dead_keys": {
+        "^": { "combineWith": "i", "result": "î" }
+      }
+    }
+  }
+  
