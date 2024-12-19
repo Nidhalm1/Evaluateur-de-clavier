@@ -1,0 +1,17 @@
+# Dossiers de configuration de l'éditeur
+.vscode/
+
+# Fichiers générés par Gradle
+.gradle/
+build/
+
+# Garder le wrapper Gradle (important pour que tout le monde puisse utiliser Gradle facilement)
+!gradle/wrapper/gradle-wrapper.jar
+
+# Fichiers système
+*.class
+*.log
+*.out
+*.tmp
+
+# F
