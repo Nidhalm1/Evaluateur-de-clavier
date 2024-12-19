@@ -1,0 +1,33 @@
+# Evaluateur de Disposition de Clavier
+
+## Description
+
+Ce programme analyse et évalue les dispositions de clavier en fonction d'un corpus de textes fourni.
+
+## Structure du Projet
+
+- `src/` : Contient le code source Java.
+- `defaultCorpus/` : Contient les fichiers de corpus par défaut.
+- `config/config.json` : Fichier de configuration pour spécifier les fichiers de corpus.
+- `corpusCache.json` : Fichier de cache généré automatiquement.
+
+## Configuration
+
+### Utiliser le Corpus Par Défaut
+
+Par défaut, le programme utilise les fichiers de corpus situés dans le répertoire `defaultCorpus/`. Aucun changement est nécessaire.
+
+### Utiliser un Corpus Personnalisé
+
+1. Préparez vos fichiers de corpus et placez-les dans un répertoire (par exemple, `userCorpus/`).
+2. Modifiez le fichier `config/config.json` pour spécifier les chemins vers vos fichiers de corpus.
+
+**Exemple :**
+
+```json
+{
+  "corpusFiles": [
+    "userCorpus/userDoc.txt",
+    "userCorpus/userCode.py"
+  ]
+}

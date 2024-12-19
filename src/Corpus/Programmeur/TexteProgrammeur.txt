@@ -1,0 +1,25 @@
+public class Calculatrice {
+    
+    // Additionne deux nombres
+    public int addition(int a, int b) {
+        return a + b;
+    }
+    
+    // Soustrait le deuxième nombre du premier
+    public int soustraction(int a, int b) {
+        return a - b;
+    }
+    
+    // Multiplie deux nombres
+    public int multiplication(int a, int b) {
+        return a * b;
+    }
+    
+    // Divise le premier nombre par le deuxième
+    public double division(int a, int b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Le diviseur ne peut pas être zéro.");
+        }
+        return (double) a / b;
+    }
+}

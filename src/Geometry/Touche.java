@@ -1,3 +1,4 @@
+package src.Geometry;
 public class Touche {
     private String id ;
     private int ligne ;

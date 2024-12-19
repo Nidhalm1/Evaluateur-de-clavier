@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'application' // Ajout de ce plugin
+}
+
+group = 'com.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    // ...existing code...
+}
+
+dependencies {
+    implementation 'org.json:json:20230227' // Vérifiez la version ou mettez à jour si nécessaire
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClass = 'src.Analyseur.CorpusManager' // Nom de votre classe principale avec le package complet
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src'] // Définissez directement le dossier `src` comme source
+        }
+    }
+}
