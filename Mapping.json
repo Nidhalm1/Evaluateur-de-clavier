@@ -1,9 +1,9 @@
 {
-    "keyboardLayout": {
-      "layers": [
+    "dispositionClavier": {
+      "couches": [
         {
-          "name": "base",
-          "mappings": {
+          "nom": "base",
+          "mappages": {
             "K00": "a",
             "K01": "z",
             "K02": "e",
@@ -17,8 +17,8 @@
           }
         },
         {
-          "name": "shift",
-          "mappings": {
+          "nom": "majuscule",
+          "mappages": {
             "K00": "A",
             "K01": "Z",
             "K02": "E",
@@ -32,9 +32,8 @@
           }
         }
       ],
-      "dead_keys": {
-        "^": { "combineWith": "i", "result": "î" }
+      "touchesMortes": {
+        "^": { "combineAvec": "i", "résultat": "î" }
       }
     }
   }
-  
