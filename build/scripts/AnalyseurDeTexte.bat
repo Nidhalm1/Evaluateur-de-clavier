@@ -70,7 +70,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\AnalyseurDeTexte-1.0-SNAPSHOT.jar;%APP_HOME%\lib\json-20230227.jar;%APP_HOME%\lib\commons-lang3-3.12.0.jar
+set CLASSPATH=%APP_HOME%\lib\AnalyseurDeTexte-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jackson-annotations-2.15.0.jar;%APP_HOME%\lib\jackson-core-2.15.0.jar;%APP_HOME%\lib\jackson-databind-2.15.0.jar;%APP_HOME%\lib\commons-lang3-3.12.0.jar;%APP_HOME%\lib\fastdoubleparser-0.8.0.jar
 
 
 @rem Execute AnalyseurDeTexte

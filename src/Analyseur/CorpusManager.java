@@ -1,7 +1,7 @@
-package src.Analyseur;
+package Analyseur;
+
+import java.util.List;
 
 public class CorpusManager {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+    List<String> corpusFiles;
 }

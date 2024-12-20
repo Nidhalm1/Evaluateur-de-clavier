@@ -1,7 +1,6 @@
-package src.DispositionFonc;
+package DispositionFonc;
 
 import java.util.List;
 
-public class KeyboardLayout {
-    private List<Couche> couches ;
-}
+// KeyboardLayout est un ensemble de couches
+public record KeyboardLayout(List<Couche> couches) {}

@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Définition de la structure Contact
+typedef struct {
+    char nom[50];
+    char telephone[15];
+    char email[50];
+} Contact;
+
+// Définition de la structure ListeContacts
+typedef struct {
+    Contact *contacts;
+    int taille;
+    int capacite;
+} ListeContacts;
+
+// Initialisation de la liste de contacts
+void initialiserListe(ListeContacts *liste) {
+    liste->taille = 0;
+    liste->capacite = 2; // Capacité initiale
+    liste->contacts = (Contact *)malloc(liste->capacite * sizeof(Contact));
+    if (liste->contacts == NULL) {
+        printf("Erreur d'allocation mémoire.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+// Ajout d'un contact à la liste
+void ajouterContact(ListeContacts *liste, Contact contact) {
+    if (liste->taille == liste->capacite) {
+        liste->capacite *= 2;
+        liste->contacts = (Contact *)realloc(liste->contacts, liste->capacite * sizeof(Contact));
+        if (liste->contacts == NULL) {
+            printf("Erreur de réallocation mémoire.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+    liste->contacts[liste->taille++] = contact;
+}
+
+// Affichage de tous les contacts
+void afficherContacts(ListeContacts *liste) {
+    if (liste->taille == 0) {
+        printf("La liste de contacts est vide.\n");
+        return;
+    }
+    printf("\nListe des Contacts :\n");
+    printf("---------------------\n");
+    for (int i = 0; i < liste->taille; i++) {
+        printf("Contact %d:\n", i + 1);
+        printf("Nom       : %s\n", liste->contacts[i].nom);
+        printf("Téléphone : %s\n", liste->contacts[i].telephone);
+        printf("Email     : %s\n", liste->contacts[i].email);
+        printf("---------------------\n");
+    }
+}
+
+// Recherche d'un contact par nom
+int rechercherContact(ListeContacts *liste, char *nomRecherche) {
+    for (int i = 0; i < liste->taille; i++) {
+        if (strcasecmp(liste->contacts[i].nom, nomRecherche) == 0) {
+            return i;
+        }
+    }
+    return -1; // Non trouvé
+}

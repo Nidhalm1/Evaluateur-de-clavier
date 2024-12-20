@@ -1,8 +1,6 @@
-package src.DispositionFonc;
+package DispositionFonc;
 
 import java.util.Map;
 
-public class Couche {
-    private String nom;
-    private Map<String,String> mappage;
-}
+// Couche peut être un record, immuable, qui associe un nom à un mappage
+public record Couche(String nom, Map<String, String> mappage) {}

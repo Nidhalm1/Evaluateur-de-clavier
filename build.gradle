@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.json:json:20230227' // Vérifiez la version ou mettez à jour si nécessaire
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'//jackson pour le json
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }

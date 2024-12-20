@@ -1,4 +1,4 @@
-package src.Geometry;
+package Geometry;
 public class Parser {
     
 }
