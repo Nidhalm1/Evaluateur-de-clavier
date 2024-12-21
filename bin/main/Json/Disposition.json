@@ -8,15 +8,5 @@
             { "id": "K02", "ligne": 0, "colonne": 2, "doigt": "MAJEUR_GAUCHE" },
             { "id": "K03", "ligne": 0, "colonne": 3, "doigt": "INDEX_GAUCHE" }
         ]
-    },
-    "doigts": {
-        "AURICULAIRE_GAUCHE": { "main": "GAUCHE" },
-        "ANNULAIRE_GAUCHE": { "main": "GAUCHE" },
-        "MAJEUR_GAUCHE": { "main": "GAUCHE" },
-        "INDEX_GAUCHE": { "main": "GAUCHE" },
-        "INDEX_DROIT": { "main": "DROITE" },
-        "MAJEUR_DROIT": { "main": "DROITE" },
-        "ANNULAIRE_DROIT": { "main": "DROITE" },
-        "AURICULAIRE_DROIT": { "main": "DROITE" }
     }
 }

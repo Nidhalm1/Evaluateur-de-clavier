@@ -1,6 +1,6 @@
 {
     "corpusFiles": [
-      "Corpus/Programmeur/TexteProgrammeur.txt",
-      "Corpus/Programmeur/Texte2.txt"
+      "src/Corpus/Programmeur/TexteProgrammeur.txt",
+      "src/Corpus/Programmeur/Texte2.txt"
     ]
 }

@@ -66,3 +66,5 @@ int rechercherContact(ListeContacts *liste, char *nomRecherche) {
     }
     return -1; // Non trouvé
 }
+
+// Assurez-vous que ce fichier est enregistré en UTF-8 sans BOM

@@ -28,7 +28,7 @@ test {
 }
 
 application {
-    mainClass = 'src.Analyseur.CorpusManager' // Nom de votre classe principale avec le package complet
+    mainClass = 'Analyseur.CorpusManager' // Nom de votre classe principale avec le package correct
 }
 
 sourceSets {

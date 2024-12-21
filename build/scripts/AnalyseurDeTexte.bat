@@ -74,7 +74,7 @@ set CLASSPATH=%APP_HOME%\lib\AnalyseurDeTexte-1.0-SNAPSHOT.jar;%APP_HOME%\lib\ja
 
 
 @rem Execute AnalyseurDeTexte
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %ANALYSEUR_DE_TEXTE_OPTS%  -classpath "%CLASSPATH%" src.Analyseur.CorpusManager %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %ANALYSEUR_DE_TEXTE_OPTS%  -classpath "%CLASSPATH%" Analyseur.CorpusManager %*
 
 :end
 @rem End local scope for the variables with windows NT shell

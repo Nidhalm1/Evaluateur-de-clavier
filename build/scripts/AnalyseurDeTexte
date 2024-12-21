@@ -213,7 +213,7 @@ DEFAULT_JVM_OPTS=""
 
 set -- \
         -classpath "$CLASSPATH" \
-        src.Analyseur.CorpusManager \
+        Analyseur.CorpusManager \
         "$@"
 
 # Stop when "xargs" is not available.
