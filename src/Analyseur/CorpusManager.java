@@ -57,7 +57,6 @@ public class CorpusManager implements CorpusReader {
             // Génération des unigrammes
             String unigramme = texte.substring(i, i + 1);
             nGrammeMap.put(unigramme, nGrammeMap.getOrDefault(unigramme, 0) + 1);
-            
             // Génération des bigrammes
             if (i + 2 <= len) {
                 String bigramme = texte.substring(i, i + 2);
