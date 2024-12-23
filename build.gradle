@@ -1,40 +1,45 @@
 plugins {
     id 'java'
-    id 'application' // Ajout de ce plugin
 }
 
-group = 'com.example'
-version = '1.0-SNAPSHOT'
+group = 'com.example' // Remplacez par votre groupe ou organisation
+version = '1.0.0'
 
 repositories {
     mavenCentral()
-    // ...existing code...
 }
 
 dependencies {
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'//jackson pour le json
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    // Bibliothèque Jackson pour la manipulation des fichiers JSON
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+
+    // JUnit 5 pour les tests
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-test {
-    useJUnitPlatform()
-}
-
-application {
-    mainClass = 'Analyseur.CorpusManager' // Nom de votre classe principale avec le package correct
+tasks.withType(Test) {
+    useJUnitPlatform() // Configuration pour utiliser JUnit 5
 }
 
 sourceSets {
     main {
         java {
-            srcDirs = ['src'] // Définissez directement le dossier `src` comme source
+            srcDirs = ['src/main'] // Chemin des sources principales
+        }
+        /*resources {
+            srcDirs = ['src/main/resources'] // Chemin des ressources
+        }*/
+    }
+    test {
+        java {
+            srcDirs = ['src/test'] // Chemin des tests
         }
     }
 }

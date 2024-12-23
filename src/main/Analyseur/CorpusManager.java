@@ -35,7 +35,7 @@ public class CorpusManager implements CorpusReader {
     @Override
     public void initialiserContenu() {
         try {
-            String fichierJson = "src/Json/Corpus.json";
+            String fichierJson = "src/main/resources/Corpus.json";
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, List<String>> map = objectMapper.readValue(new File(fichierJson), new TypeReference<Map<String, List<String>>>(){});
             List<String> filesPath = map.get("corpusFiles");

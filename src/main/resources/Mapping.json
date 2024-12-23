@@ -1,0 +1,25 @@
+{
+    "dispositionClavier": {
+      "couches": [
+        {
+          "nom": "base",
+          "mappages": {
+            "K00": "a",
+            "K01": "z",
+            "K02": "e",
+            "K03": "r",
+            "K04": "t",
+            "K05": "y",
+            "K06": "u",
+            "K07": "i",
+            "K08": "o",
+            "K09": "p",
+            "KSHIFT": "" 
+          }
+        }
+      ],
+      "touchesMortes": {
+        "^": { "combineAvec": "i", "résultat": "î" }
+      }
+    }
+  }
