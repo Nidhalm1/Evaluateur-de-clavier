@@ -2,167 +2,179 @@
     "lignes": 4,
     "colonnes": 13,
     "touches": [
-        {
-            "id": "K00",
-            "ligne": 0,
-            "colonne": 0,
-            "doigt": "AURICULAIRE_GAUCHE"
-        },
-        {
-            "id": "K01",
-            "ligne": 0,
-            "colonne": 1,
-            "doigt": "AURICULAIRE_GAUCHE"
-        },
-        {
-            "id": "K02",
-            "ligne": 0,
-            "colonne": 2,
-            "doigt": "ANNULAIRE_GAUCHE"
-        },
-        {
-            "id": "K03",
-            "ligne": 0,
-            "colonne": 3,
-            "doigt": "MAJEUR_GAUCHE"
-        },
-        {
-            "id": "K04",
-            "ligne": 0,
-            "colonne": 4,
-            "doigt": "INDEX_GAUCHE"
-        },
-        {
-            "id": "K05",
-            "ligne": 0,
-            "colonne": 5,
-            "doigt": "INDEX_DROIT"
-        },
-        {
-            "id": "K06",
-            "ligne": 0,
-            "colonne": 6,
-            "doigt": "INDEX_DROIT"
-        },
-        {
-            "id": "K07",
-            "ligne": 0,
-            "colonne": 7,
-            "doigt": "MAJEUR_DROIT"
-        },
-        {
-            "id": "K08",
-            "ligne": 0,
-            "colonne": 8,
-            "doigt": "ANNULAIRE_DROIT"
-        },
-        {
-            "id": "K09",
-            "ligne": 0,
-            "colonne": 9,
-            "doigt": "AURICULAIRE_DROIT"
-        },
-        {
-            "id": "K10",
-            "ligne": 1,
-            "colonne": 0,
-            "doigt": "AURICULAIRE_GAUCHE"
-        },
-        {
-            "id": "K11",
-            "ligne": 1,
-            "colonne": 1,
-            "doigt": "ANNULAIRE_GAUCHE"
-        },
-        {
-            "id": "K12",
-            "ligne": 1,
-            "colonne": 2,
-            "doigt": "MAJEUR_GAUCHE"
-        },
-        {
-            "id": "K13",
-            "ligne": 1,
-            "colonne": 3,
-            "doigt": "INDEX_GAUCHE"
-        },
-        {
-            "id": "K14",
-            "ligne": 1,
-            "colonne": 4,
-            "doigt": "INDEX_GAUCHE"
-        },
-        {
-            "id": "K15",
-            "ligne": 1,
-            "colonne": 5,
-            "doigt": "INDEX_DROIT"
-        },
-        {
-            "id": "K16",
-            "ligne": 1,
-            "colonne": 6,
-            "doigt": "INDEX_DROIT"
-        },
-        {
-            "id": "K17",
-            "ligne": 1,
-            "colonne": 7,
-            "doigt": "MAJEUR_DROIT"
-        },
-        {
-            "id": "K18",
-            "ligne": 1,
-            "colonne": 8,
-            "doigt": "ANNULAIRE_DROIT"
-        },
-        {
-            "id": "K19",
-            "ligne": 1,
-            "colonne": 9,
-            "doigt": "AURICULAIRE_DROIT"
-        },
-        {
-            "id": "K20",
-            "ligne": 2,
-            "colonne": 0,
-            "doigt": "AURICULAIRE_GAUCHE"
-        },
-        {
-            "id": "K21",
-            "ligne": 2,
-            "colonne": 1,
-            "doigt": "ANNULAIRE_GAUCHE"
-        },
-        {
-            "id": "K22",
-            "ligne": 2,
-            "colonne": 2,
-            "doigt": "MAJEUR_GAUCHE"
-        },
-        {
-            "id": "K23",
-            "ligne": 2,
-            "colonne": 3,
-            "doigt": "INDEX_GAUCHE"
-        },
-        {
-            "id": "K24",
-            "ligne": 2,
-            "colonne": 4,
-            "doigt": "INDEX_GAUCHE"
-        },
-        {
-            "id": "K25",
-            "ligne": 2,
-            "colonne": 5,
-            "doigt": "INDEX_DROIT"
-        },
-        {
-            "id": "KSHIFT",
-            "ligne": 3,
-            "colonne": 0,
-            "doigt": "AURICULAIRE_GAUCHE"
-        }
+      {
+        "id": "K00",
+        "ligne": 0,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "K01",
+        "ligne": 0,
+        "colonne": 1,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "K02",
+        "ligne": 0,
+        "colonne": 2,
+        "doigt": "ANNULAIRE_GAUCHE"
+      },
+      {
+        "id": "K03",
+        "ligne": 0,
+        "colonne": 3,
+        "doigt": "MAJEUR_GAUCHE"
+      },
+      {
+        "id": "K04",
+        "ligne": 0,
+        "colonne": 4,
+        "doigt": "INDEX_GAUCHE"
+      },
+      {
+        "id": "K05",
+        "ligne": 0,
+        "colonne": 5,
+        "doigt": "INDEX_DROIT"
+      },
+      {
+        "id": "K06",
+        "ligne": 0,
+        "colonne": 6,
+        "doigt": "INDEX_DROIT"
+      },
+      {
+        "id": "K07",
+        "ligne": 0,
+        "colonne": 7,
+        "doigt": "MAJEUR_DROIT"
+      },
+      {
+        "id": "K08",
+        "ligne": 0,
+        "colonne": 8,
+        "doigt": "ANNULAIRE_DROIT"
+      },
+      {
+        "id": "K09",
+        "ligne": 0,
+        "colonne": 9,
+        "doigt": "AURICULAIRE_DROIT"
+      },
+      {
+        "id": "K10",
+        "ligne": 1,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "K11",
+        "ligne": 1,
+        "colonne": 1,
+        "doigt": "ANNULAIRE_GAUCHE"
+      },
+      {
+        "id": "K12",
+        "ligne": 1,
+        "colonne": 2,
+        "doigt": "MAJEUR_GAUCHE"
+      },
+      {
+        "id": "K13",
+        "ligne": 1,
+        "colonne": 3,
+        "doigt": "INDEX_GAUCHE"
+      },
+      {
+        "id": "K14",
+        "ligne": 1,
+        "colonne": 4,
+        "doigt": "INDEX_GAUCHE"
+      },
+      {
+        "id": "K15",
+        "ligne": 1,
+        "colonne": 5,
+        "doigt": "INDEX_DROIT"
+      },
+      {
+        "id": "K16",
+        "ligne": 1,
+        "colonne": 6,
+        "doigt": "INDEX_DROIT"
+      },
+      {
+        "id": "K17",
+        "ligne": 1,
+        "colonne": 7,
+        "doigt": "MAJEUR_DROIT"
+      },
+      {
+        "id": "K18",
+        "ligne": 1,
+        "colonne": 8,
+        "doigt": "ANNULAIRE_DROIT"
+      },
+      {
+        "id": "K19",
+        "ligne": 1,
+        "colonne": 9,
+        "doigt": "AURICULAIRE_DROIT"
+      },
+      {
+        "id": "K20",
+        "ligne": 2,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "K21",
+        "ligne": 2,
+        "colonne": 1,
+        "doigt": "ANNULAIRE_GAUCHE"
+      },
+      {
+        "id": "K22",
+        "ligne": 2,
+        "colonne": 2,
+        "doigt": "MAJEUR_GAUCHE"
+      },
+      {
+        "id": "K23",
+        "ligne": 2,
+        "colonne": 3,
+        "doigt": "INDEX_GAUCHE"
+      },
+      {
+        "id": "K24",
+        "ligne": 2,
+        "colonne": 4,
+        "doigt": "INDEX_GAUCHE"
+      },
+      {
+        "id": "K25",
+        "ligne": 2,
+        "colonne": 5,
+        "doigt": "INDEX_DROIT"
+      },
+      {
+        "id": "k26",
+        "ligne": 3,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "k27",
+        "ligne": 3,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      },
+      {
+        "id": "k28",
+        "ligne": 3,
+        "colonne": 0,
+        "doigt": "AURICULAIRE_GAUCHE"
+      }
     ]
 }
