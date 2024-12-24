@@ -3,9 +3,12 @@ package DispositionFonc;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import Geometry.KeyboardGeometry;
 import Geometry.Touche;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,35 +20,65 @@ public record KeyboardLayout(List<Couche> couches) {
         for (Couche couche : couches) {
             if ("base".equalsIgnoreCase(couche.nom())) {
                 couche.mappage().forEach((key, value) -> reverseMappage.put(value, key));
-                return reverseMappage;
             }
         }
         return reverseMappage;
     }
 
-    public Map<String, List<Touche>> toucheCorrespondant(Map<String, Integer> nGrammeMap, KeyboardGeometry clavier) {
-        Map<String, String> reverseMappage = reverseMappage();
-        Map<String, List<Touche>> toucheCorrespondant = new HashMap<String, List<Touche>>();
-        nGrammeMap.forEach((key, value) -> {
-            boolean majuscule = false;
-            int len = key.length();
-            List<Touche> listetouches = new ArrayList<Touche>();
-            for (int i = 0; i < len; i++) {
-                if (Character.isUpperCase(key.charAt(i)) && majuscule == false) {
-                    majuscule = true;
-                    String idTouche = reverseMappage.get("");
-                    clavier.findToucheById(idTouche).ifPresent(listetouches::add);
-                } else if (Character.isLowerCase(key.charAt(i)) && majuscule) {
-                    majuscule = false;
-                    String idTouche = reverseMappage.get("");
-                    clavier.findToucheById(idTouche).ifPresent(listetouches::add);
-                }
-                String charctere = String.valueOf(Character.toLowerCase(key.charAt(i)));
-                String idTouche = reverseMappage.get(charctere);
-                clavier.findToucheById(idTouche).ifPresent(listetouches::add);
-            }
-            toucheCorrespondant.put(key, listetouches);
-        });
-        return toucheCorrespondant;
+    public static KeyboardLayout initialiserContenu() {
+        try {
+            String fichierJson = "src/main/resources/Mapping.json";
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(new File(fichierJson), KeyboardLayout.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // Return a default KeyboardLayout object
+        }
     }
+
+    public Map<String, List<Touche>> toucheCorrespondant(Map<String, Integer> nGrammeMap, KeyboardGeometry clavier) {
+        Map<String, String> reverseMap = reverseMappage();
+        Map<String, List<Touche>> result = new HashMap<>();
+
+        nGrammeMap.forEach((word, count) -> {
+            List<Touche> touches = new ArrayList<>();
+            boolean majuscule = false;
+            for (char c : word.toCharArray()) {
+                if (Character.isUpperCase(c) && majuscule == false) {
+                    clavier.findToucheById("KSHIFT").ifPresent(touche -> {
+                        touches.add(touche);
+                    });
+                    majuscule = true;
+                }
+                if (Character.isLowerCase(c) && majuscule == true) {
+                    clavier.findToucheById("KSHIFT").ifPresent(touche -> {
+                        touches.add(touche);
+                    });
+                    majuscule = false;
+                }
+                String ch = String.valueOf(Character.toLowerCase(c));
+                String toucheId = reverseMap.get(ch);
+                if (toucheId != null) {
+                    clavier.findToucheById(toucheId).ifPresent(touche -> {
+                        touches.add(touche);
+                    });
+                }
+            }
+            result.put(word, touches);
+        });
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        KeyboardLayout layout = initialiserContenu();
+        if (layout != null) {
+            Map<String, Integer> nGrammeMap = new HashMap<>();
+            nGrammeMap.put("bOn", 1); // Données de test
+            KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
+            Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
+            System.out.println("Result: " + result);
+        }
+    }
+
 }

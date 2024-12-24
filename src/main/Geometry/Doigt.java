@@ -1,6 +1,5 @@
 package Geometry;
 
-import Geometry.Main;
 
 public enum Doigt {
     AURICULAIRE_GAUCHE(Main.GAUCHE),
