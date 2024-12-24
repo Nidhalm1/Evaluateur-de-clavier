@@ -143,6 +143,7 @@ public record KeyboardLayout(List<Couche> couches) {
                 }
                 String toucheId = reverseMaps.get(indiceMap).get(ch);
                 if (toucheId != null) {
+                    System.out.println("Touche ID: " + toucheId);
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
@@ -162,6 +163,7 @@ public record KeyboardLayout(List<Couche> couches) {
             KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
             Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
             System.out.println("Result: " + result);
+            System.out.println("Nombre de touches: " + result.values().stream().mapToInt(List::size).sum());
         }
     }
 
