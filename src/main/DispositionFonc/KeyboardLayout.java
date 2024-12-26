@@ -9,7 +9,6 @@ import Geometry.KeyboardGeometry;
 import Geometry.Touche;
 
 import java.io.File;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -143,13 +142,14 @@ public record KeyboardLayout(List<Couche> couches) {
                 }
                 String toucheId = reverseMaps.get(indiceMap).get(ch);
                 if (toucheId != null) {
-                    System.out.println("Touche ID: " + toucheId);
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
                 }
             }
-            result.put(word, touches);
+            if (touches.size()<4){
+                result.put(word, touches);
+            }
         });
 
         return result;
@@ -159,7 +159,7 @@ public record KeyboardLayout(List<Couche> couches) {
         KeyboardLayout layout = initialiserContenu();
         if (layout != null) {
             Map<String, Integer> nGrammeMap = new HashMap<>();
-            nGrammeMap.put("bOîn", 1); // Données de test
+            nGrammeMap.put("bO", 1); // Données de test
             KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
             Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
             System.out.println("Result: " + result);

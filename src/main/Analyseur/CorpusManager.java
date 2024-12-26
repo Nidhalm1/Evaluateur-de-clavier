@@ -49,7 +49,7 @@ public class CorpusManager implements CorpusReader {
             e.printStackTrace();
         }
     }
-
+    @Override
     public Map<String, Integer> nGramme() {
         Map<String, Integer> nGrammeMap = new HashMap<>();
         for (String texte : contenu) {

@@ -25,6 +25,8 @@ public record KeyboardGeometry(int lignes, int colonnes, List<Touche> touches) {
     public Optional<Touche> findToucheById(String toucheId) {
         return touches().stream().filter(t-> t.id().equals(toucheId)).findFirst();
     }
+
+    public 
     public static void main(String[] args) {
         KeyboardGeometry keyboardGeometry = KeyboardGeometry.initialiserAttribut();
         if (keyboardGeometry != null) {

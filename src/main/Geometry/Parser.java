@@ -5,6 +5,8 @@ import java.util.Map;
 import Analyseur.*;
 import DispositionFonc.KeyboardLayout;
 public class Parser {
+
+    
     public static void main(String[] args) {
         CorpusManager corpusManager = new CorpusManager();
         Map<String, Integer> nGrammeMap = corpusManager.nGramme();
