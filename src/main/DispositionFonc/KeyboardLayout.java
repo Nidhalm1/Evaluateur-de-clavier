@@ -1,5 +1,12 @@
 package DispositionFonc;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,10 +14,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Geometry.KeyboardGeometry;
 import Geometry.Touche;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 // KeyboardLayout est un ensemble de couches
 public record KeyboardLayout(List<Couche> couches) {
@@ -65,9 +68,19 @@ public record KeyboardLayout(List<Couche> couches) {
         return reverseMappage;
     }
 
+    public Map<String, String> reverse_shift() {
+        Map<String, String> reverseMappage = new HashMap<>();
+        for (Couche couche : couches) {
+            if ("shift_pressed".equalsIgnoreCase(couche.nom())) {
+                couche.mappage().forEach((key, value) -> reverseMappage.put(value, key));
+            }
+        }
+        return reverseMappage;
+    }
+
     public static KeyboardLayout initialiserContenu() {
         try {
-            String fichierJson = "src/main/resources/Mapping.json";
+            String fichierJson = "analyseurdetexte/src/main/resources/Mapping.json";
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(new File(fichierJson), KeyboardLayout.class);
         } catch (Exception e) {
@@ -92,7 +105,8 @@ public record KeyboardLayout(List<Couche> couches) {
                 reverse_DEAD_ACUTE(),
                 reverse_DEAD_GRAVE(),
                 reverse_DEAD_CIRCUMFLEX(),
-                reverse_DEAD_TREMA());
+                reverse_DEAD_TREMA(),
+                reverse_shift());
 
         Map<String, List<Touche>> result = new HashMap<>();
 
@@ -121,33 +135,36 @@ public record KeyboardLayout(List<Couche> couches) {
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
-                }
-                else if (indiceMap == 2) {
+                } else if (indiceMap == 2) {
                     String toucheId = reverseMaps.get(0).get("dead_grave");
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
-                }
-                else if (indiceMap == 3) {
+                } else if (indiceMap == 3) {
                     String toucheId = reverseMaps.get(0).get("dead_circumflex");
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
-                }
-                else if (indiceMap == 4) {
+                } else if (indiceMap == 4) {
                     String toucheId = reverseMaps.get(0).get("dead_trema");
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
-                }
-                String toucheId = reverseMaps.get(indiceMap).get(ch);
-                if (toucheId != null) {
+                } else if (indiceMap == 5) {
+                    String toucheId = reverseMaps.get(0).get("shift");
                     clavier.findToucheById(toucheId).ifPresent(touche -> {
                         touches.add(touche);
                     });
                 }
+                if (indiceMap >= 0 && indiceMap < reverseMaps.size()) {
+                    String toucheId = reverseMaps.get(indiceMap).get(ch);
+                    if (toucheId != null) {
+                        clavier.findToucheById(toucheId).ifPresent(touche -> {
+                            touches.add(touche);
+                        });
+                    }}
             }
-            if (touches.size()<4){
+            if (touches.size() < 4) {
                 result.put(word, touches);
             }
         });
@@ -155,16 +172,103 @@ public record KeyboardLayout(List<Couche> couches) {
         return result;
     }
 
+   public void create_disposition(String filePath) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        File file = new File(filePath);
+      
+        try (FileWriter writer = new FileWriter(file, false)) {
+            writer.write(""); 
+        }
+
+        Map<String, List<Touche>> newContent = new HashMap<>();
+        newContent.put("touches",new ArrayList<Touche>());
+
+        Map<String, String> reverseMap = 
+            reverseBase();
+
+            reverseMap=shuffleReverseMap(reverseMap);
+        
+        List<String> keys_yet_attribued=new ArrayList<>();
+        int line =1;
+        int column=1;
+        int line_specific=0;
+        int column_specific=0;
+
+        List<String> specificKeys = List.of("@","&","é","\"","'","(","§","è","!","ç","à",")","-","shift","enter");
+
+        for(String key_s:specificKeys){
+            if(!keys_yet_attribued.contains(key_s)){
+                if (key_s.equalsIgnoreCase("shift")){
+                    newContent.get("touches").add(new Touche(reverseMap.get(key_s),3,0,Touche.attributdoigt(0)));
+                    keys_yet_attribued.add(key_s);
+                    continue;
+                    
+                }
+                if (key_s.equalsIgnoreCase("enter")){
+                    newContent.get("touches").add(new Touche(reverseMap.get(key_s),1,13,Touche.attributdoigt(13)));
+                    keys_yet_attribued.add(key_s);
+                    continue;
+                } 
+                newContent.get("touches").add(new Touche(reverseMap.get(key_s),line_specific,column_specific,Touche.attributdoigt(column_specific)));
+                keys_yet_attribued.add(key_s);
+                column_specific++;
+           }
+        }
+
+        for (Map.Entry<String, String> en : reverseMap.entrySet()) {
+            String key = en.getKey();
+            if (!keys_yet_attribued.contains(key)){
+                newContent.get("touches").add(new Touche(en.getValue(), line, column, Touche.attributdoigt(column)));
+                keys_yet_attribued.add(key);
+                if (column+1==10){
+                    column=1;
+                    line++;
+                }else{
+                    column++;
+                }
+            }
+        }
+        mapper.writeValue(file, newContent);
+    }
+
+  
+
+public Map<String, String> shuffleReverseMap(Map<String, String> reverseMap) {
+   
+    List<Map.Entry<String, String>> entryList = new ArrayList<>(reverseMap.entrySet());
+    Collections.shuffle(entryList);
+
+   
+    Map<String, String> shuffledMap = new LinkedHashMap<>();
+    for (Map.Entry<String, String> entry : entryList) {
+        shuffledMap.put(entry.getKey(), entry.getValue());
+    }
+
+    return shuffledMap;
+}
+
+   
+
     public static void main(String[] args) {
         KeyboardLayout layout = initialiserContenu();
         if (layout != null) {
             Map<String, Integer> nGrammeMap = new HashMap<>();
-            nGrammeMap.put("bO", 1); // Données de test
+            nGrammeMap.put("2", 1); // Données de test
             KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
             Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
+            try {
+                layout.create_disposition("analyseurdetexte/src/main/resources/Disposition.json");
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             System.out.println("Result: " + result);
             System.out.println("Nombre de touches: " + result.values().stream().mapToInt(List::size).sum());
+            /*Map<String,String> test= layout.reverseBase();
+            for (Map.Entry<String, String> en : test.entrySet()) {
+                System.out.println("La clé est :"+en.getKey() +" et la valeur est:"+ en.getValue());
+               
+            }*/
         }
     }
-
 }
