@@ -51,8 +51,8 @@ public class CorpusManager implements CorpusReader {
     @Override
     public void initialiserContenu() {
         try {
-            String fichierJson = "analyseurdetexte/src/main/resources/Corpus.json";
-            date = getDateFromJson("analyseurdetexte/src/main/resources/Saving.json");
+            String fichierJson = "src/main/resources/Corpus.json";
+            date = getDateFromJson("src/main/resources/Saving.json");
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> map = objectMapper.readValue(new File(fichierJson),
                     new TypeReference<Map<String, Object>>() {
@@ -148,15 +148,15 @@ public class CorpusManager implements CorpusReader {
 
     @Override
     public Map<String, Integer> nGramme() {
-        Path path = Paths.get("analyseurdetexte/src/main/resources/nGrammeMap.csv");
-        System.out.println("La date stocker est \n"+date + "\n"+ getLastModifiedDate("analyseurdetexte/src/main/resources/Corpus.json")+"\n");
-        if (date.equalsIgnoreCase(getLastModifiedDate("analyseurdetexte/src/main/resources/Corpus.json")) && Files.exists(path)) {
+        Path path = Paths.get("src/main/resources/nGrammeMap.csv");
+        System.out.println("La date stocker est \n"+date + "\n"+ getLastModifiedDate("src/main/resources/Corpus.json")+"\n");
+        if (date.equalsIgnoreCase(getLastModifiedDate("src/main/resources/Corpus.json")) && Files.exists(path)) {
             System.out.println("Le fichier existe je recupere les donner ");
             return readMapFromCSV(
-                    "analyseurdetexte/src/main/resources/nGrammeMap.csv");
+                    "src/main/resources/nGrammeMap.csv");
         }
-        updatedate("analyseurdetexte/src/main/resources/Corpus.json");
-        date=getDateFromJson("analyseurdetexte/src/main/resources/Saving.json");
+        updatedate("src/main/resources/Corpus.json");
+        date=getDateFromJson("src/main/resources/Saving.json");
         System.out.println("Le fichier n'existe pas je calcule les donner ");
         Map<String, Integer> nGrammeMap = new HashMap<>();
         for (String texte : contenu) {
@@ -178,13 +178,13 @@ public class CorpusManager implements CorpusReader {
                 }
             }
         }
-        writeMapinCSV(nGrammeMap, "analyseurdetexte/src/main/resources/nGrammeMap.csv");
+        writeMapinCSV(nGrammeMap, "src/main/resources/nGrammeMap.csv");
         return nGrammeMap;
     }
 
     public static void updatedate(String jsonFilePath) {
         Path chemin = Paths.get(jsonFilePath);
-        Path saving=Paths.get("analyseurdetexte/src/main/resources/Saving.json");
+        Path saving=Paths.get("src/main/resources/Saving.json");
 
         try {
             // Obtenir la date de dernière modification du fichier

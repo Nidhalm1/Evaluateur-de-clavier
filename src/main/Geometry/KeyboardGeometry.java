@@ -14,7 +14,7 @@ public record KeyboardGeometry(int lignes, int colonnes, List<Touche> touches) {
 
     public static KeyboardGeometry initialiserAttribut() {
         try {
-            String fichierJson = "analyseurdetexte/src/main/resources/Disposition.json";
+            String fichierJson = "src/main/resources/Disposition.json";
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(new File(fichierJson), KeyboardGeometry.class);
         } catch (Exception e) {

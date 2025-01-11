@@ -80,7 +80,7 @@ public record KeyboardLayout(List<Couche> couches) {
 
     public static KeyboardLayout initialiserContenu() {
         try {
-            String fichierJson = "analyseurdetexte/src/main/resources/Mapping.json";
+            String fichierJson = "src/main/resources/Mapping.json";
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(new File(fichierJson), KeyboardLayout.class);
         } catch (Exception e) {
@@ -257,7 +257,7 @@ public Map<String, String> shuffleReverseMap(Map<String, String> reverseMap) {
             KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
             Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
             try {
-                layout.create_disposition("analyseurdetexte/src/main/resources/Disposition.json");
+                layout.create_disposition("src/main/resources/Disposition.json");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
