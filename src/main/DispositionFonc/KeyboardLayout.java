@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Geometry.Doigt;
 import Geometry.KeyboardGeometry;
 import Geometry.Touche;
 
@@ -163,6 +164,18 @@ public record KeyboardLayout(List<Couche> couches) {
                             touches.add(touche);
                         });
                     }}
+                if (c=='\n'){
+                    String toucheId = reverseMaps.get(0).get("enter");
+                    clavier.findToucheById(toucheId).ifPresent(touche -> {
+                        touches.add(touche);
+                    });
+                }
+                if (c==' '){
+                    String toucheId = reverseMaps.get(0).get("space");
+                    clavier.findToucheById(toucheId).ifPresent(touche -> {
+                        touches.add(touche);
+                    });
+                }
             }
             if (touches.size() < 4) {
                 result.put(word, touches);
@@ -194,7 +207,7 @@ public record KeyboardLayout(List<Couche> couches) {
         int line_specific=0;
         int column_specific=0;
 
-        List<String> specificKeys = List.of("@","&","é","\"","'","(","§","è","!","ç","à",")","-","shift","enter");
+        List<String> specificKeys = List.of("@","&","é","\"","'","(","§","è","!","ç","à",")","-","shift","enter","space");
 
         for(String key_s:specificKeys){
             if(!keys_yet_attribued.contains(key_s)){
@@ -206,6 +219,13 @@ public record KeyboardLayout(List<Couche> couches) {
                 }
                 if (key_s.equalsIgnoreCase("enter")){
                     newContent.get("touches").add(new Touche(reverseMap.get(key_s),1,13,Touche.attributdoigt(13)));
+                    keys_yet_attribued.add(key_s);
+                    continue;
+                }
+                if (key_s.equalsIgnoreCase("space")){
+                   
+                    newContent.get("touches").add(new Touche(reverseMap.get(key_s),4,4,Doigt.POUCE_DROIT));
+                   
                     keys_yet_attribued.add(key_s);
                     continue;
                 } 
@@ -220,7 +240,7 @@ public record KeyboardLayout(List<Couche> couches) {
             if (!keys_yet_attribued.contains(key)){
                 newContent.get("touches").add(new Touche(en.getValue(), line, column, Touche.attributdoigt(column)));
                 keys_yet_attribued.add(key);
-                if (column+1==10){
+                if (column==12){
                     column=1;
                     line++;
                 }else{
@@ -253,7 +273,7 @@ public Map<String, String> shuffleReverseMap(Map<String, String> reverseMap) {
         KeyboardLayout layout = initialiserContenu();
         if (layout != null) {
             Map<String, Integer> nGrammeMap = new HashMap<>();
-            nGrammeMap.put("2", 1); // Données de test
+            nGrammeMap.put("a ", 1); // Données de test
             KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
             Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
             try {
