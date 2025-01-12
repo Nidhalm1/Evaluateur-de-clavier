@@ -28,23 +28,22 @@ Exemple :
 ```
 
 ### 4. Modification de la disposition
-- Le fichier contenant la disposition des touches est situé dans :
-  `src/main/resources/disposition.json`.
-- Ce fichier détermine :
-  - La position des touches sur le clavier.
-  - Le doigt associé à chaque touche.
+- Le fichier `src/main/resources/disposition.json` contient la configuration de la disposition des touches du clavier.
+  - Il indique la position de chaque touche et le doigt utilisé pour y accéder.
+  - Ce fichier ne précise pas les caractères produits par les touches.
 
 ### 5. Modification du mappage des touches
-- Les résultats produits par chaque touche sont définis dans le fichier :
-  `src/main/resources/Mapping.json`.
-- Si vous souhaitez modifier le résultat produit par une touche (par exemple, que la touche située à la ligne 1, colonne 1, produise `s` au lieu de `a`), modifiez le fichier `Mapping.json` en conséquence.
+- Le fichier `src/main/resources/Mapping.json` définit les caractères réellement produits par chaque touche.
+  - Par exemple, si la touche située à la ligne 1, colonne 1 (identifiée comme `k00`) doit produire `a`, cela est défini ici.
+  - Vous pouvez modifier le fichier pour personnaliser le comportement des touches.
 
 Exemple :
 ```json
 {
-  "k00": "s"
+  "k00": "a"
 }
 ```
+- Ainsi, vous pouvez modifier la position d'une touche dans `disposition.json` ou son mappage dans `Mapping.json`, selon vos besoins.
 
 ---
 
@@ -55,7 +54,10 @@ Depuis la racine du projet, utilisez la commande suivante pour compiler le proje
 ```bash
 gradle build
 ```
-
+### 2. Executer le projet
+```bash
+gradle run
+```
 ### 2. Lancer les tests
 Pour exécuter les tests, utilisez la commande suivante :
 ```bash
@@ -71,5 +73,5 @@ gradle test
 4. **Compiler le projet** : Exécutez `gradle build`.
 5. **Lancer les tests** : Exécutez `gradle test`.
 
-N'oubliez pas de recompiler et relancer votre projet après avoir effectué des modifications pour qu'elles soient prises en compte.
+
 
