@@ -4,14 +4,14 @@ package Analyseur;
  * Représente différents types de mouvements associés à un score.
  */
 public enum Score {
-  SFB_MOUV(2.5),
-  Cissor_MOUV(-0.5),
-  LSB_MOUV(-0.3),
-  SWITCH_MOUV(-0.2),
-  BEARING_MOUV(-0.1),
-  REDIRECTION_MOUV(-0.1),
-  WORST_MOUV(-0.2),
-  SKS_MOUV(1),
+  SFB_MOUV(-2.0),
+  Cissor_MOUV(-1.5),
+  LSB_MOUV(-1.0),
+  SWITCH_MOUV(3.0),
+  BEARING_MOUV(4.0),
+  REDIRECTION_MOUV(-2.5),
+  WORST_MOUV(-5.0),
+  SKS_MOUV(-3.0),
   MainEval(-0.1);
 
   private final double score;
