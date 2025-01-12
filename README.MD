@@ -1,6 +1,10 @@
 # Guide d'utilisation du projet
 
 ## Organisation des fichiers
+###  Membres du projet
+-MOUSSA Nidhal <br>
+-GBAGUIDI Nerval
+
 
 ### 1. Code source
 - Le code du projet est situé dans le dossier `src`.
