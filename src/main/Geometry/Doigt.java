@@ -35,5 +35,4 @@ public enum Doigt {
     public Main main() {
         return main;
     }
-
 }
