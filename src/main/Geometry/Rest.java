@@ -1,5 +1,9 @@
 package Geometry;
 
+/**
+ * The {@code Rest} class represents a position of rest in a 2D space,
+ * defined by its line and column coordinates.
+ */
 public class Rest {
     private int line;
     private int column;

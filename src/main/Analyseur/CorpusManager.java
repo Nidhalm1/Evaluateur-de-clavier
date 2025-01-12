@@ -24,9 +24,17 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * Gère le chargement, la lecture et l'analyse d'un corpus.
+ */
 public class CorpusManager implements CorpusReader {
     private List<String> corpusFiles = new ArrayList<>();
 
+    /**
+     * Retourne le contenu du corpus.
+     *
+     * @return liste du contenu
+     */
     public List<String> getContenu() {
         return contenu;
     }
@@ -39,14 +47,27 @@ public class CorpusManager implements CorpusReader {
         initialiserContenu();
     }
 
+    /**
+     * Retourne la liste de fichiers du corpus.
+     *
+     * @return la liste des chemins de fichiers
+     */
     public List<String> getCorpusFiles() {
         return corpusFiles;
     }
 
+    /**
+     * Définit la liste de fichiers du corpus.
+     *
+     * @param corpusFiles la liste à utiliser
+     */
     public void setCorpusFiles(List<String> corpusFiles) {
         this.corpusFiles = corpusFiles;
     }
 
+    /**
+     * Initialise la liste de fichiers et leur contenu à partir d'un JSON.
+     */
     @Override
     public void initialiserContenu() {
         try {
@@ -77,6 +98,12 @@ public class CorpusManager implements CorpusReader {
         }
     }
 
+    /**
+     * Écrit une map de paires clé-valeur numériques dans un fichier CSV.
+     *
+     * @param map  la map à écrire
+     * @param path le chemin du fichier CSV
+     */
     public static void writeMapinCSV(Map<String, ? extends Number> map, String path) {
         try {
             Path filePath = Paths.get(path);
@@ -99,6 +126,12 @@ public class CorpusManager implements CorpusReader {
         }
     }
 
+    /**
+     * Lit un fichier CSV et retourne une map clé-valeur (Integer).
+     *
+     * @param path le chemin du fichier CSV
+     * @return la map lue
+     */
     public static Map<String, Integer> readMapFromCSV(String path) {
         Map<String, Integer> map = new HashMap<>();
 
@@ -132,6 +165,11 @@ public class CorpusManager implements CorpusReader {
         return map;
     }
 
+    /**
+     * Retourne la taille totale du contenu du corpus.
+     *
+     * @return la somme des longueurs de chaque texte
+     */
     public int sizeofcontenu() {
         int ret = 0;
         for (String text : contenu) {
@@ -142,6 +180,11 @@ public class CorpusManager implements CorpusReader {
         return ret;
     }
 
+    /**
+     * Calcule et retourne un n-gramme (uni, bi et trigramme).
+     *
+     * @return la map des n-grammes et de leur fréquence
+     */
     @Override
     public Map<String, Integer> nGramme() {
         Path path = Paths.get("src/main/resources/nGrammeMap.csv");
@@ -176,6 +219,11 @@ public class CorpusManager implements CorpusReader {
         return nGrammeMap;
     }
 
+    /**
+     * Met à jour la date de dernière modification dans un fichier JSON.
+     *
+     * @param jsonFilePath chemin du fichier JSON
+     */
     public static void updatedate(String jsonFilePath) {
         Path chemin = Paths.get(jsonFilePath);
         Path saving = Paths.get("src/main/resources/Saving.json");
@@ -205,6 +253,12 @@ public class CorpusManager implements CorpusReader {
         }
     }
 
+    /**
+     * Retourne la date de dernière modification d'un fichier JSON.
+     *
+     * @param jsonFilePath chemin du fichier JSON
+     * @return la date formatée
+     */
     public static String getLastModifiedDate(String jsonFilePath) {
         Path chemin = Paths.get(jsonFilePath);
         try {
@@ -223,6 +277,12 @@ public class CorpusManager implements CorpusReader {
         }
     }
 
+    /**
+     * Récupère la date stockée dans le fichier Saving.json.
+     *
+     * @param filePath chemin du fichier JSON
+     * @return la date lue
+     */
     public static String getDateFromJson(String filePath) {
         try {
 
@@ -237,9 +297,5 @@ public class CorpusManager implements CorpusReader {
         }
     }
 
-    public static void main(String[] args) {
-        CorpusManager corpusManager = new CorpusManager();
-        Map<String, Integer> unGramme = corpusManager.nGramme();
-        unGramme.forEach((key, value) -> System.out.println(key + " : " + value));
-    }
+
 }

@@ -1,10 +1,28 @@
 package Geometry;
-// Un record pour représenter une Touche
+
+/**
+ * Un record représentant une touche de clavier avec son identifiant,
+ * sa position (ligne, colonne) et son doigt associé.
+ */
 public record Touche(String id, int ligne, int colonne, Doigt doigt) {
+
+    /**
+     * Affiche les informations de la touche dans la console.
+     */
     public void afficher() {
         System.out.println("Touche: " + id + ", Ligne: " + ligne + ", Colonne: " + colonne + ", Doigt: " + doigt);
     }
 
+    /**
+     * This method maps a given column index to a corresponding finger (Doigt).
+     * The mapping is based on a predefined set of rules.
+     * 
+     * @param column the index of the column to be mapped to a finger
+     * @return the corresponding Doigt (finger) for the given column index
+     * @throws AssertionError if the column index is out of the predefined range (0-13)
+     * 
+     * @implNote This method is for improvement purposes but is not yet finalized.
+     */
     public static Doigt attributdoigt(int column ){
         switch (column) {
             case 0:

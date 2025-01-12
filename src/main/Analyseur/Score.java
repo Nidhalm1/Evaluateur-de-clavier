@@ -1,5 +1,8 @@
 package Analyseur;
 
+/**
+ * Représente différents types de mouvements associés à un score.
+ */
 public enum Score {
   SFB_MOUV(2.5),
   Cissor_MOUV(-0.5),
@@ -21,6 +24,11 @@ public enum Score {
     this.score = score;
   }
 
+  /**
+   * Retourne la valeur du score selon la nature du mouvement.
+   * @param mouv Le mouvement
+   * @return Score associé ou 0.0
+   */
   public static double correspond_score(String mouv) {
     switch (mouv) {
       case "SFB":

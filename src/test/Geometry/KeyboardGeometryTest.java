@@ -15,6 +15,9 @@ public class KeyboardGeometryTest {
 
     // ...existing code...
 
+    /**
+     * Vérifie l'attribution correcte d'un doigt à une colonne de touche valide.
+     */
     @Test
     void testAttributdoigt() {
         // Arrange
@@ -28,6 +31,9 @@ public class KeyboardGeometryTest {
         assertEquals(attendu, resultat);
     }
 
+    /**
+     * Vérifie qu'une colonne invalide déclenche une AssertionError.
+     */
     @Test
     void testAttributdoigtInvalidColumn() {
         // Arrange
@@ -42,6 +48,9 @@ public class KeyboardGeometryTest {
         assertTrue(exception.toString().contains(attendu));
     }
 
+    /**
+     * Vérifie les getters de l'énumération Doigt.
+     */
     @Test
     void testDoigtGetters() {
         // Arrange
@@ -60,6 +69,9 @@ public class KeyboardGeometryTest {
         assertEquals(3, order);
     }
 
+    /**
+     * Vérifie les champs du record Touche.
+     */
     @Test
     void testToucheRecord() {
         // Arrange
@@ -72,6 +84,9 @@ public class KeyboardGeometryTest {
         assertEquals(Doigt.INDEX_GAUCHE, touche.doigt());
     }
 
+    /**
+     * Vérifie la méthode afficher() pour une seule touche.
+     */
     @Test
     void testAfficher() {
         // Arrange
@@ -93,6 +108,9 @@ public class KeyboardGeometryTest {
         }
     }
 
+    /**
+     * Vérifie l'affichage de plusieurs touches successives.
+     */
     @Test
     void testAffichageMultipleTouches() {
         // Arrange

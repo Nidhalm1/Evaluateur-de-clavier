@@ -7,7 +7,12 @@ import Analyseur.CorpusManager;
 import Analyseur.KeyboardEvaluator;
 import DispositionFonc.KeyboardLayout;
 
+/**
+ * Classe principale pour analyser et évaluer la géométrie du clavier.
+ */
 public class Parser {
+    /**
+     * Point d'entrée de l'application.     */
     public static void main(String[] args) {
         CorpusManager corpusManager = new CorpusManager();
         KeyboardEvaluator test = new KeyboardEvaluator();

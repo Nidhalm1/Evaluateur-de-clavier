@@ -10,6 +10,13 @@ import Geometry.Touche;
 
 public class KeyboardEvaluator {
 
+    /**
+     * Évalue la différence d'utilisation entre la main gauche et la main droite.
+     *
+     * @param toucheCorrspond Association entre n-gramme et touches
+     * @param ngramme Fréquences des n-grammes
+     * @return Différence absolue entre main gauche et main droite
+     */
     public long eval_PourcentageMain(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] mainGauche = { 0 };
         final int[] mainDroite = { 0 };
@@ -28,6 +35,13 @@ public class KeyboardEvaluator {
         return Math.abs(mainGauche[0] - mainDroite[0]);
     }
 
+    /**
+     * Détecte et compte les bigrammes effectués avec le même doigt.
+     *
+     * @param toucheCorrspond Association entre n-gramme et touches
+     * @param ngramme Fréquences des n-grammes
+     * @return Nombre de bigrammes réalisés avec le même doigt
+     */
     public long eval_SFB_mouv(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final long[] sameFinger = { 0 };
 
@@ -43,6 +57,9 @@ public class KeyboardEvaluator {
         return sameFinger[0];
     }
 
+    /**
+     * Évalue les bigrammes type LSB.
+     */
     public long eval_LSB_mouv(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] LSB = { 0 };
 
@@ -58,6 +75,9 @@ public class KeyboardEvaluator {
         return LSB[0];
     }
 
+    /**
+     * Compte le nombre de bigrammes de type 'ciseaux'.
+     */
     public long eval_Cissors(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] is_Cissors = { 0 };
 
@@ -73,6 +93,9 @@ public class KeyboardEvaluator {
         return is_Cissors[0];
     }
 
+    /**
+     * Détermine les bigrammes de type 'switch'.
+     */
     public long eval_is_Switch(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] Switch = { 0 };
 
@@ -88,6 +111,9 @@ public class KeyboardEvaluator {
         return Switch[0];
     }
 
+    /**
+     * Repère le mouvement 'bearing' dans les bigrammes.
+     */
     public long eval_Bearing(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] bearing = { 0 };
 
@@ -103,6 +129,9 @@ public class KeyboardEvaluator {
         return bearing[0];
     }
 
+    /**
+     * Évalue la redirection au sein des trigrammes.
+     */
     public long eval_redirection(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] redirec = { 0 };
 
@@ -118,6 +147,9 @@ public class KeyboardEvaluator {
         return redirec[0];
     }
 
+    /**
+     * Repère la pire forme de redirection dans les trigrammes.
+     */
     public long eval_worst_redirection(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] ret = { 0 };
 
@@ -133,6 +165,9 @@ public class KeyboardEvaluator {
         return ret[0];
     }
 
+    /**
+     * Détecte si un trigramme forme un schéma SKS.
+     */
     public long eval_SKS(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final int[] ret = { 0 };
 
@@ -148,6 +183,9 @@ public class KeyboardEvaluator {
         return ret[0];
     }
 
+    /**
+     * Regroupe toutes les évaluations dans une même map et écrit les résultats dans un CSV.
+     */
     public Map<String, Long> EvalutionMapping(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         Map<String, Long> ret = new HashMap<>();
         ret.put("SFB", eval_SFB_mouv(toucheCorrspond, ngramme));
@@ -164,6 +202,9 @@ public class KeyboardEvaluator {
 
     }
 
+    /**
+     * Calcule le score total en fonction des fréquences et d'un facteur de pondération.
+     */
     public static double Total_Score(Map<String, Long> map_eval, int corpus_length) {
         double ret = 0;
         for (Map.Entry<String, Long> entry : map_eval.entrySet()) {

@@ -16,7 +16,9 @@ import Geometry.Doigt;
 import Geometry.KeyboardGeometry;
 import Geometry.Touche;
 
-// KeyboardLayout est un ensemble de couches
+/**
+ * Représente la disposition d'un clavier, organisée en plusieurs couches.
+ */
 public record KeyboardLayout(List<Couche> couches) {
 
     public Map<String, String> reverseBase() {
@@ -79,6 +81,10 @@ public record KeyboardLayout(List<Couche> couches) {
         return reverseMappage;
     }
 
+    /**
+     * Initialise le contenu à partir d'un fichier JSON.
+     * @return KeyboardLayout ou null en cas d'erreur.
+     */
     public static KeyboardLayout initialiserContenu() {
         try {
             String fichierJson = "src/main/resources/Mapping.json";
@@ -90,6 +96,12 @@ public record KeyboardLayout(List<Couche> couches) {
         }
     }
 
+    /**
+     * Retourne l'indice de la liste de Maps correspondant au caractère donné.
+     * @param list liste de Maps à analyser
+     * @param charactere caractère recherché
+     * @return l'indice trouvé ou -1
+     */
     public int mapCorrespondant(List<Map<String, String>> list, String charactere) {
         for (int i = 0; i < list.size(); i++) {
             Map<String, String> mapActuel = list.get(i);
@@ -100,6 +112,13 @@ public record KeyboardLayout(List<Couche> couches) {
         return -1;
     }
 
+    /**
+     * Construit la liste de touches correspondant à chaque mot
+     * en utilisant la géométrie du clavier.
+     * @param nGrammeMap Map des mots et de leur fréquence
+     * @param clavier instance de KeyboardGeometry
+     * @return un Map associant un mot à sa liste de touches
+     */
     public Map<String, List<Touche>> toucheCorrespondant(Map<String, Integer> nGrammeMap, KeyboardGeometry clavier) {
         List<Map<String, String>> reverseMaps = List.of(
                 reverseBase(),
@@ -185,6 +204,11 @@ public record KeyboardLayout(List<Couche> couches) {
         return result;
     }
 
+    /**
+     * Crée une nouvelle disposition de clavier et l'écrit dans un fichier.
+     * @param filePath chemin du fichier à écrire
+     * @throws IOException en cas de problème de lecture/écriture
+     */
    public void create_disposition(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(filePath);
@@ -251,8 +275,11 @@ public record KeyboardLayout(List<Couche> couches) {
         mapper.writeValue(file, newContent);
     }
 
-  
-
+    /**
+     * Mélange aléatoirement la Map fournie.
+     * @param reverseMap la Map à mélanger
+     * @return la Map mélangée
+     */
 public Map<String, String> shuffleReverseMap(Map<String, String> reverseMap) {
    
     List<Map.Entry<String, String>> entryList = new ArrayList<>(reverseMap.entrySet());
