@@ -13,18 +13,16 @@ public enum Doigt {
     AURICULAIRE_DROIT(Main.DROITE, 0, new Rest(2, 10));
 
     private final Main main;
+    private final Rest rest_position;
+    private final int order;
 
     public Rest getRest_position() {
         return rest_position;
     }
 
-    private final Rest rest_position;
-
     public int getOrder() {
         return order;
     }
-
-    private final int order;
 
     Doigt(Main main, int order, Rest pos) {
         this.main = main;

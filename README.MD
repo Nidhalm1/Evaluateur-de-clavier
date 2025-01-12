@@ -45,6 +45,11 @@ Exemple :
 ```
 - Ainsi, vous pouvez modifier la position d'une touche dans `disposition.json` ou son mappage dans `Mapping.json`, selon vos besoins.
 
+### 6. Gestion des séquences complexes
+- Pour certaines séquences de caractères comme `îl`, les lettres sont décomposées en plusieurs frappes. Par exemple, `îl` nécessite trois frappes : `^`, `i`, puis `l`.
+- Le projet suit également les consignes de mouvements nécessaires, notamment les mouvements comme le "ciseau" et autres gestes ergonomiques, qui sont pris en compte dans le calcul du score.
+
+
 ---
 
 ## Compilation et exécution
@@ -72,6 +77,9 @@ gradle test
 3. **Changer le mappage des touches** : Modifiez `Mapping.json`.
 4. **Compiler le projet** : Exécutez `gradle build`.
 5. **Lancer les tests** : Exécutez `gradle test`.
+
+
+
 
 
 
