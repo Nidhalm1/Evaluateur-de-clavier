@@ -24,16 +24,16 @@ public class Parser {
         System.out.println("======================================");
 
         // Explication claire du score
-        System.out.println("Note : Plus le score est proche de 0, meilleure est la disposition.");
+        System.out.println("Note : Plus le score est plus grand que 0, meilleure est la disposition.");
         System.out.println();
 
         // Affichage du score total
         System.out.printf("-> Score total de cette disposition : %.4f%n", eval);
 
         // Analyse de la qualité de la disposition
-        if (eval < 0.5000) {
+        if (eval < 0) {
             System.out.println("[!] La disposition est consideree comme mauvaise.");
-        } else if (eval == 0.5000) {
+        } else if (eval == 0) {
             System.out.println("[~] La disposition est consideree comme moyenne.");
         } else {
             System.out.println("[✔] La disposition est parfaite !");

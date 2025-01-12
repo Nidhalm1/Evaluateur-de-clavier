@@ -1,14 +1,15 @@
 package Analyseur;
 
 public enum Score {
-  SFB_MOUV(0.7),
-  Cissor_MOUV(0.5),
-  LSB_MOUV(0.6),
-  SWITCH_MOUV(0.2),
-  BEARING_MOUV(0.1),
-  REDIRECTION_MOUV(0.7),
-  WORST_MOUV(1.0),
-  SKS_MOUV(0.6);
+  SFB_MOUV(2.5),
+  Cissor_MOUV(-0.5),
+  LSB_MOUV(-0.3),
+  SWITCH_MOUV(-0.2),
+  BEARING_MOUV(-0.1),
+  REDIRECTION_MOUV(-0.1),
+  WORST_MOUV(-0.2),
+  SKS_MOUV(1),
+  MainEval(-0.2);
 
   private final double score;
 
@@ -38,10 +39,10 @@ public enum Score {
         return WORST_MOUV.getScore();
       case "SKS":
         return SKS_MOUV.getScore();
+      case "MainEval":
+        return MainEval.getScore();
       default:
         return 0.0;
     }
-
   }
-
 }

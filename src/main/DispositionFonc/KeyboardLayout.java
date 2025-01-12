@@ -268,27 +268,4 @@ public Map<String, String> shuffleReverseMap(Map<String, String> reverseMap) {
 }
 
    
-
-    public static void main(String[] args) {
-        KeyboardLayout layout = initialiserContenu();
-        if (layout != null) {
-            Map<String, Integer> nGrammeMap = new HashMap<>();
-            nGrammeMap.put("a ", 1); // Données de test
-            KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut(); // Vérifiez cette méthode
-            Map<String, List<Touche>> result = layout.toucheCorrespondant(nGrammeMap, clavier);
-            try {
-                layout.create_disposition("src/main/resources/Disposition.json");
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            System.out.println("Result: " + result);
-            System.out.println("Nombre de touches: " + result.values().stream().mapToInt(List::size).sum());
-            /*Map<String,String> test= layout.reverseBase();
-            for (Map.Entry<String, String> en : test.entrySet()) {
-                System.out.println("La clé est :"+en.getKey() +" et la valeur est:"+ en.getValue());
-               
-            }*/
-        }
-    }
 }

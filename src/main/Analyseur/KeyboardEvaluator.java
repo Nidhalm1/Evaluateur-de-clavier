@@ -4,16 +4,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Geometry.Doigt;
+import Geometry.Main;
 import Geometry.Touche;
 
 public class KeyboardEvaluator {
+
+    public long eval_PourcentageMain(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
+        final int[] mainGauche = { 0 };
+        final int[] mainDroite = { 0 };
+
+        toucheCorrspond.forEach((xgramme, touches) -> {
+            int len = touches.size();
+            if (len == 1) {
+                if (touches.get(0).doigt().main() == Main.GAUCHE) {
+                    mainGauche[0] += ngramme.get(xgramme);
+                } else if (touches.get(0).doigt().main() == Main.GAUCHE) {
+                    mainDroite[0] += ngramme.get(xgramme);
+                }
+            }
+
+        });
+        return Math.abs(mainGauche[0] - mainDroite[0]);
+    }
 
     public long eval_SFB_mouv(Map<String, List<Touche>> toucheCorrspond, Map<String, Integer> ngramme) {
         final long[] sameFinger = { 0 };
 
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
-            if (len - 1 == 2) {
+            if (len == 2) {
                 if (MovementBasic.isSameFingerBigram(touches.get(0), touches.get(1))) {
                     sameFinger[0] += ngramme.get(xgramme);
                 }
@@ -28,7 +48,7 @@ public class KeyboardEvaluator {
 
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
-            if (len - 1 == 2) {
+            if (len == 2) {
                 if (MovementBasic.is_LSB(touches.get(0), touches.get(1))) {
                     LSB[0] += ngramme.get(xgramme);
                 }
@@ -43,7 +63,7 @@ public class KeyboardEvaluator {
 
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
-            if (len - 1 == 2) {
+            if (len == 2) {
                 if (MovementBasic.is_Cissors(touches.get(0), touches.get(1))) {
                     is_Cissors[0] += ngramme.get(xgramme);
                 }
@@ -58,7 +78,7 @@ public class KeyboardEvaluator {
 
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
-            if (len - 1 == 2) {
+            if (len == 2) {
                 if (MovementBasic.is_Switching(touches.get(0), touches.get(1))) {
                     Switch[0] += ngramme.get(xgramme);
                 }
@@ -138,6 +158,7 @@ public class KeyboardEvaluator {
         ret.put("REDIRECTION", eval_redirection(toucheCorrspond, ngramme));
         ret.put("WORST", eval_worst_redirection(toucheCorrspond, ngramme));
         ret.put("SKS", eval_SKS(toucheCorrspond, ngramme));
+        ret.put("MainEval", eval_SKS(toucheCorrspond, ngramme));
         CorpusManager.writeMapinCSV(ret, "../resources/EvaluationMapping.csv");
         return ret;
 
@@ -146,10 +167,10 @@ public class KeyboardEvaluator {
     public static double Total_Score(Map<String, Long> map_eval, int corpus_length) {
         double ret = 0;
         for (Map.Entry<String, Long> entry : map_eval.entrySet()) {
-            ret += (entry.getValue() * Score.correspond_score(entry.getKey())) / corpus_length;
+            ret += (entry.getValue() * Score.correspond_score(entry.getKey()));
 
         }
-        return ret;
+        return (ret / corpus_length);
 
     }
 }

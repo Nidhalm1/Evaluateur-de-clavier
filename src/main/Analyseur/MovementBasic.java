@@ -14,6 +14,11 @@ public final class MovementBasic {
 
     }
 
+    public static boolean pourcentageMainevalute(Touche first, Touche second) {
+        return first.doigt() == second.doigt();
+
+    }
+
     public static boolean is_Cissors(Touche first, Touche second) {
         return ((first.doigt().main() == second.doigt().main()) && ((first.ligne() != second.ligne())));
     }
