@@ -1,4 +1,3 @@
 {
-    "corpusFiles": [
-      "src/main/Corpus/Ecrivain/anglaisTexte.txt"    ]
+  "corpusFiles" : ["src/main/resources/Corpus/Programmeur/TexteProgrammeur.txt" ]
 }

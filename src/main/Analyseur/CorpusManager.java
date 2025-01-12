@@ -34,7 +34,6 @@ public class CorpusManager implements CorpusReader {
     private List<String> contenu = new ArrayList<>();
 
     private static String date;
-   
 
     public CorpusManager() {
         initialiserContenu();
@@ -71,7 +70,6 @@ public class CorpusManager implements CorpusReader {
                     }
                 }
             }
-          
 
             // Afficher les contenus
             for (String content : contenu) {
@@ -149,14 +147,15 @@ public class CorpusManager implements CorpusReader {
     @Override
     public Map<String, Integer> nGramme() {
         Path path = Paths.get("src/main/resources/nGrammeMap.csv");
-        System.out.println("La date stocker est \n"+date + "\n"+ getLastModifiedDate("src/main/resources/Corpus.json")+"\n");
+        System.out.println(
+                "La date stocker est \n" + date + "\n" + getLastModifiedDate("src/main/resources/Corpus.json") + "\n");
         if (date.equalsIgnoreCase(getLastModifiedDate("src/main/resources/Corpus.json")) && Files.exists(path)) {
             System.out.println("Le fichier existe je recupere les donner ");
             return readMapFromCSV(
                     "src/main/resources/nGrammeMap.csv");
         }
         updatedate("src/main/resources/Corpus.json");
-        date=getDateFromJson("src/main/resources/Saving.json");
+        date = getDateFromJson("src/main/resources/Saving.json");
         System.out.println("Le fichier n'existe pas je calcule les donner ");
         Map<String, Integer> nGrammeMap = new HashMap<>();
         for (String texte : contenu) {
@@ -184,7 +183,7 @@ public class CorpusManager implements CorpusReader {
 
     public static void updatedate(String jsonFilePath) {
         Path chemin = Paths.get(jsonFilePath);
-        Path saving=Paths.get("src/main/resources/Saving.json");
+        Path saving = Paths.get("src/main/resources/Saving.json");
 
         try {
             // Obtenir la date de dernière modification du fichier
@@ -196,14 +195,11 @@ public class CorpusManager implements CorpusReader {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String dateFormatee = dateTime.format(formatter);
 
-          
             ObjectMapper objectMapper = new ObjectMapper();
             ObjectNode jsonNode = (ObjectNode) objectMapper.readTree(Files.newBufferedReader(saving));
 
-          
             jsonNode.put("date", dateFormatee);
 
-          
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(Files.newBufferedWriter(saving), jsonNode);
 
             System.out.println("La date de dernière modification a été synchronisée : " + dateFormatee);
@@ -235,13 +231,11 @@ public class CorpusManager implements CorpusReader {
 
     public static String getDateFromJson(String filePath) {
         try {
-         
+
             ObjectMapper objectMapper = new ObjectMapper();
 
-         
             Map<String, String> jsonData = objectMapper.readValue(new File(filePath), Map.class);
 
-          
             return jsonData.getOrDefault("date", "Valeur non trouvée");
         } catch (Exception e) {
             e.printStackTrace();

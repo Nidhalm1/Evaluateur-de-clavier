@@ -25,10 +25,6 @@ public class Parser {
             System.out.println();
         }
         System.out.println("Le score total de cette Disposition est de " + eval);
-
-        for (String cont : corpusManager.getContenu()) {
-            System.out.println(cont);
-        }
     }
 
 }

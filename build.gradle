@@ -1,8 +1,9 @@
 plugins {
     id 'java'
+    id 'application'  // Ajout du plugin Application
 }
 
-group = 'com.example' // Remplacez par votre groupe ou organisation
+group = 'com.example'
 version = '1.0.0'
 
 repositories {
@@ -10,12 +11,9 @@ repositories {
 }
 
 dependencies {
-    // Bibliothèque Jackson pour la manipulation des fichiers JSON
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
-
-    // JUnit 5 pour les tests
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 }
 
@@ -25,21 +23,27 @@ java {
 }
 
 tasks.withType(Test) {
-    useJUnitPlatform() // Configuration pour utiliser JUnit 5
+    useJUnitPlatform()
 }
 
 sourceSets {
     main {
         java {
-            srcDirs = ['src/main'] // Chemin des sources principales
+            srcDirs = ['src/main']
         }
-        /*resources {
-            srcDirs = ['src/main/resources'] // Chemin des ressources
-        }*/
+        // resources {
+        //     srcDirs = ['src/main/resources']
+        // }
     }
     test {
         java {
-            srcDirs = ['src/test'] // Chemin des tests
+            srcDirs = ['src/test']
         }
     }
+}
+
+// Configuration du plugin Application : spécifier la classe principale
+application {
+    // Utilisez le nom complet de la classe principale, pas le chemin du fichier
+    mainClass = 'Geometry.Parser'
 }
