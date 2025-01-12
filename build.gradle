@@ -8,6 +8,9 @@ version = '1.0.0'
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:unchecked"
 }
+tasks.withType(JavaExec) {
+    jvmArgs '-Dfile.encoding=UTF-8'
+}
 
 repositories {
     mavenCentral()
