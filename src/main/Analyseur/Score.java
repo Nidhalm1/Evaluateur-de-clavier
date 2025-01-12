@@ -9,7 +9,7 @@ public enum Score {
   REDIRECTION_MOUV(-0.1),
   WORST_MOUV(-0.2),
   SKS_MOUV(1),
-  MainEval(-0.2);
+  MainEval(-0.1);
 
   private final double score;
 
