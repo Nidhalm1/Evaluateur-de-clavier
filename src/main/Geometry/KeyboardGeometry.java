@@ -27,16 +27,4 @@ public record KeyboardGeometry(int lignes, int colonnes, List<Touche> touches) {
         return touches().stream().filter(t -> t.id().equals(toucheId)).findFirst();
     }
 
-    public static void main(String[] args) {
-        KeyboardGeometry keyboardGeometry = KeyboardGeometry.initialiserAttribut();
-        if (keyboardGeometry != null) {
-            System.out.println("Lignes: " + keyboardGeometry.lignes());
-            System.out.println("Colonnes: " + keyboardGeometry.colonnes());
-            System.out.println("Touches: ");
-            keyboardGeometry.touches().forEach(touche -> System.out
-                    .println("ID: " + touche.id() + ", nom: " + touche.doigt() + ", main: " + touche.doigt().main()));
-        } else {
-            System.out.println("Erreur lors de l'initialisation de la géométrie du clavier.");
-        }
-    }
 }

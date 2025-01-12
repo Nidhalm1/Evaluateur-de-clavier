@@ -1,0 +1,143 @@
+@startuml
+' Paramètres de style pour une meilleure lisibilité
+skinparam monochrome false
+skinparam class {
+    BackgroundColor<<final>> LightYellow
+    BackgroundColor<<record>> Wheat
+    BackgroundColor<<interface>> LightBlue
+    ArrowColor Navy
+    BorderColor Black
+}
+skinparam enum {
+    BackgroundColor Lavender
+    BorderColor Black
+}
+skinparam package {
+    BackgroundColor LightSteelBlue
+    BorderColor Black
+}
+skinparam arrow {
+    Thickness 2
+}
+hide empty members
+
+'=============================== Package Analyseur ===============================
+package "Analyseur" {
+    interface CorpusReader {
+        +initialiserContenu()
+        +nGramme() : Map<String, Integer>
+    }
+
+    class CorpusManager implements CorpusReader {
+        +getContenu() : List<String>
+        +nGramme() : Map<String, Integer>
+        -- autres éléments --
+    }
+
+    class KeyboardEvaluator {
+        +eval_PourcentageMain(...)
+        +eval_SFB_mouv(...)
+        +eval_LSB_mouv(...)
+        +eval_Cissors(...)
+        +eval_is_Switch(...)
+        +eval_Bearing(...)
+        +eval_redirection(...)
+        +eval_worst_redirection(...)
+        +eval_SKS(...)
+        +EvalutionMapping(...)
+        +static Total_Score(...)
+    }
+
+    class MovementBasic <<final>> {
+        ' Fonction calcul des mouvements
+    }
+
+    enum Score {
+        ' Les poids attribués
+    }
+
+    ' Relations internes au package Analyseur
+    CorpusManager --|> CorpusReader
+    KeyboardEvaluator --> MovementBasic
+    KeyboardEvaluator --> Score
+}
+
+'=============================== Package Geometry ===============================
+package "Geometry" {
+    class Touche <<record>> {
+        -- Attributs du record --
+        +id : String
+        +ligne : int
+        +colonne : int
+        +doigt : Doigt
+    }
+
+    enum Doigt {
+        +main() : Main
+        +getOrder() : int
+        +getRest_position() : Rest
+        ' Valeurs: AURICULAIRE_GAUCHE, etc.
+    }
+
+    class Rest {
+        - line : int
+        - column : int
+    }
+
+    enum Main {
+        GAUCHE,
+        DROITE
+    }
+
+    class KeyboardGeometry <<record>> {
+        +lignes : int
+        +colonnes : int
+        +touches : List<Touche>
+        +findToucheById(String) : Optional<Touche>
+        -- autres éléments --
+    }
+
+    class Parser {
+        +main(String[] args)
+        -- Le main principal --
+    }
+
+    ' Relations internes au package Geometry
+    Touche --> Doigt
+    Doigt --> Main
+    Doigt --> Rest
+    KeyboardGeometry --> "*" Touche
+}
+
+'=========================== Package DispositionFonc ==============================
+package "DispositionFonc" {
+    class Couche {
+        +nom : String
+        +mappage : Map<String, String>
+    }
+
+    class KeyboardLayout {
+        +couches : List<Couche>
+        +initialiserContenu() : KeyboardLayout
+        +toucheCorrespondant(Map<String, Integer>, KeyboardGeometry) : Map<String, List<Touche>>
+        +create_disposition(String) : void
+        +shuffleReverseMap(Map<String, String>) : Map<String, String>
+        -- autres méthodes --
+    }
+
+    ' Relations internes au package DispositionFonc
+    KeyboardLayout --> "*" Couche
+    KeyboardLayout --> KeyboardGeometry
+}
+
+'=============================== Package resources ===============================
+
+
+'================================== Dépendances ==================================
+Parser --> CorpusManager
+Parser --> KeyboardEvaluator
+Parser --> KeyboardGeometry
+Parser --> KeyboardLayout
+KeyboardEvaluator --> Touche
+
+@enduml

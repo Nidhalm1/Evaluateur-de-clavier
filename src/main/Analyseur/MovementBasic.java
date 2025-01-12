@@ -60,10 +60,5 @@ public final class MovementBasic {
 
     }
 
-    public static void main(String[] args) {
-        Touche test= new Touche("k30", 0, 9, Doigt.AURICULAIRE_DROIT);
-        Touche test_2= new Touche("k31", 0, 8, Doigt.ANNULAIRE_DROIT);
-        System.out.println(is_LSB(test, test_2));
-        
-    }
+
 }
