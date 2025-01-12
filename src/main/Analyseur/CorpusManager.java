@@ -71,10 +71,6 @@ public class CorpusManager implements CorpusReader {
                 }
             }
 
-            // Afficher les contenus
-            for (String content : contenu) {
-                System.out.println(content);
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,19 +78,24 @@ public class CorpusManager implements CorpusReader {
     }
 
     public static void writeMapinCSV(Map<String, ? extends Number> map, String path) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-
-            writer.write("Clé,Valeur");
-            writer.newLine();
-
-            for (Map.Entry<String, ? extends Number> entry : map.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue());
-                writer.newLine();
+        try {
+            Path filePath = Paths.get(path);
+            Path parentDir = filePath.getParent();
+            if (parentDir != null && !Files.exists(parentDir)) {
+                Files.createDirectories(parentDir);
             }
 
-            System.out.println("Données écrites avec succès dans " + path);
+            try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardCharsets.UTF_8)) {
+                writer.write("Clé,Valeur");
+                writer.newLine();
+
+                for (Map.Entry<String, ? extends Number> entry : map.entrySet()) {
+                    writer.write(entry.getKey() + "," + entry.getValue());
+                    writer.newLine();
+                }
+            }
         } catch (IOException e) {
-            System.err.println(" Erreur lors de l'écriture du fichier CSV : " + e.getMessage());
+            System.err.println("Erreur lors de l'écriture du fichier CSV : " + e.getMessage());
         }
     }
 
@@ -124,9 +125,6 @@ public class CorpusManager implements CorpusReader {
                     }
                 }
             }
-
-            System.out.println("Données lues avec succès depuis " + path);
-
         } catch (IOException e) {
             System.err.println("Erreur lors de la lecture du fichier CSV : " + e.getMessage());
         }
@@ -147,10 +145,7 @@ public class CorpusManager implements CorpusReader {
     @Override
     public Map<String, Integer> nGramme() {
         Path path = Paths.get("src/main/resources/nGrammeMap.csv");
-        System.out.println(
-                "La date stocker est \n" + date + "\n" + getLastModifiedDate("src/main/resources/Corpus.json") + "\n");
         if (date.equalsIgnoreCase(getLastModifiedDate("src/main/resources/Corpus.json")) && Files.exists(path)) {
-            System.out.println("Le fichier existe je recupere les donner ");
             return readMapFromCSV(
                     "src/main/resources/nGrammeMap.csv");
         }
@@ -212,7 +207,6 @@ public class CorpusManager implements CorpusReader {
 
     public static String getLastModifiedDate(String jsonFilePath) {
         Path chemin = Paths.get(jsonFilePath);
-
         try {
             // Obtenir la date de dernière modification du fichier
             FileTime dernierModif = Files.getLastModifiedTime(chemin);
@@ -234,7 +228,7 @@ public class CorpusManager implements CorpusReader {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            Map<String, String> jsonData = objectMapper.readValue(new File(filePath), Map.class);
+            Map<String, String> jsonData = objectMapper.readValue(new File(filePath), new TypeReference<Map<String, String>>() {});
 
             return jsonData.getOrDefault("date", "Valeur non trouvée");
         } catch (Exception e) {

@@ -17,14 +17,17 @@ public class Parser {
         Map<String, List<Touche>> map = mapping.toucheCorrespondant(nGrammeMap, clavier);
         double eval = KeyboardEvaluator.Total_Score(test.EvalutionMapping(map, nGrammeMap),
                 corpusManager.sizeofcontenu());
-        for (Map.Entry<String, List<Touche>> entry : map.entrySet()) {
-            System.out.println("Key: " + entry.getKey());
-            for (Touche touche : entry.getValue()) {
-                touche.afficher();
-            }
-            System.out.println();
-        }
+        System.out.println("Plus le score est proche de 0 plus la disposition est meilleur");
         System.out.println("Le score total de cette Disposition est de " + eval);
+        if (eval < 0.5000) {
+            System.out.println("La disposition est mauvaise");
+        } else if (eval == 0.5000){
+            System.out.println("La disposition est moyenne");
+        }
+        else{
+            System.out.println("La disposition est parfaite");
+        }
+
     }
 
 }

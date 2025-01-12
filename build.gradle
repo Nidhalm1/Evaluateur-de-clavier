@@ -5,6 +5,9 @@ plugins {
 
 group = 'com.example'
 version = '1.0.0'
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked"
+}
 
 repositories {
     mavenCentral()
