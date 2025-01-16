@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Geometry.Doigt;
 import Geometry.Main;
 import Geometry.Touche;
 

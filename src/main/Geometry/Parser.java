@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import Analyseur.CorpusManager;
+import Analyseur.DateUpdater;
 import Analyseur.KeyboardEvaluator;
 import DispositionFonc.KeyboardLayout;
 
@@ -15,6 +16,8 @@ public class Parser {
      * Point d'entrée de l'application.     */
     public static void main(String[] args) {
         CorpusManager corpusManager = new CorpusManager();
+        DateUpdater dateUpdater = new DateUpdater();
+        corpusManager.addObserver(dateUpdater);
         KeyboardEvaluator test = new KeyboardEvaluator();
         Map<String, Integer> nGrammeMap = corpusManager.nGramme();
         KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut();

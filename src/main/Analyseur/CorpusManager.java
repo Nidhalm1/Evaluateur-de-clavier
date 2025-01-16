@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,7 +28,22 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class CorpusManager implements CorpusReader {
     private List<String> corpusFiles = new ArrayList<>();
+    private final List<CorpusObserver> observers = new ArrayList<>();
 
+    public void addObserver(CorpusObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void removeObserver(CorpusObserver observer) {
+        this.observers.remove(observer);
+    }
+
+    // Méthode qui notifie tous les observateurs
+    private void notifyObservers(Path corpusPath) {
+        for (CorpusObserver observer : observers) {
+            observer.onCorpusModified(corpusPath);
+        }
+    }
     /**
      * Retourne le contenu du corpus.
      *
@@ -192,7 +206,7 @@ public class CorpusManager implements CorpusReader {
             return readMapFromCSV(
                     "src/main/resources/nGrammeMap.csv");
         }
-        updatedate("src/main/resources/Corpus.json");
+        notifyObservers(Paths.get("src/main/resources/Corpus.json"));
         date = getDateFromJson("src/main/resources/Saving.json");
         System.out.println("Le fichier n'existe pas je calcule les donner ");
         Map<String, Integer> nGrammeMap = new HashMap<>();
@@ -249,7 +263,7 @@ public class CorpusManager implements CorpusReader {
 
         } catch (IOException e) {
             System.err.println(
-                    "Erreur lors de la synchronisation de la date de dernière modification : " + e.getMessage());
+                    "Erreur lors de la synchronisation de la date de derniere modification : " + e.getMessage());
         }
     }
 
@@ -272,7 +286,7 @@ public class CorpusManager implements CorpusReader {
             return dateTime.format(formatter);
 
         } catch (IOException e) {
-            System.err.println(" Erreur lors de la récupération de la date de modification : " + e.getMessage());
+            System.err.println(" Erreur lors de la recuperation de la date de modification : " + e.getMessage());
             return null;
         }
     }
