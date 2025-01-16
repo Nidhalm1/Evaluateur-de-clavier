@@ -32,7 +32,6 @@ public record KeyboardGeometry(int lignes, int colonnes, List<Touche> touches) {
             ObjectMapper objectMapper = new ObjectMapper();
                         KeyboardGeometry raw = objectMapper.readValue(new File(fichierJson), KeyboardGeometry.class);
 
-            // Ensuite, vous pourriez améliorer la construction
             KeyboardGeometryBuilder builder = new KeyboardGeometryBuilder()
                     .withLignes(raw.lignes())
                     .withColonnes(raw.colonnes());
