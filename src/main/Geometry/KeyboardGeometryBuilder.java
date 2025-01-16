@@ -32,7 +32,7 @@ public class KeyboardGeometryBuilder {
         if (lignes >= 6) {
             throw new IllegalArgumentException("Le nombre de lignes doit être inferieur à 7");
         }
-        if (colonnes >= 0) {
+        if (colonnes >= 6) {
             throw new IllegalArgumentException("Le nombre de colonnes doit être inferieur à 7");
         }
         return new KeyboardGeometry(lignes, colonnes, touches);
