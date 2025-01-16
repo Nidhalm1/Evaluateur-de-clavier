@@ -3,9 +3,12 @@ package Geometry;
 import java.util.List;
 import java.util.Map;
 
+import Analyseur.MovementBasic;
 import Analyseur.CorpusManager;
 import Analyseur.DateUpdater;
 import Analyseur.KeyboardEvaluator;
+import Analyseur.MovementAnalyzer;
+import Analyseur.MovementBasic;
 import DispositionFonc.KeyboardLayout;
 
 /**
@@ -18,7 +21,8 @@ public class Parser {
         CorpusManager corpusManager = new CorpusManager();
         DateUpdater dateUpdater = new DateUpdater();
         corpusManager.addObserver(dateUpdater);
-        KeyboardEvaluator test = new KeyboardEvaluator();
+        MovementAnalyzer movementAnalyzer = new MovementBasic();
+        KeyboardEvaluator test = new KeyboardEvaluator(movementAnalyzer);
         Map<String, Integer> nGrammeMap = corpusManager.nGramme();
         KeyboardGeometry clavier = KeyboardGeometry.initialiserAttribut();
         KeyboardLayout mapping = KeyboardLayout.initialiserContenu();

@@ -8,7 +8,10 @@ import Geometry.Main;
 import Geometry.Touche;
 
 public class KeyboardEvaluator {
-
+        private MovementAnalyzer movDelegation ;
+        public KeyboardEvaluator(MovementAnalyzer movDelegation){
+            this.movDelegation = movDelegation;
+        }
     /**
      * Évalue la différence d'utilisation entre la main gauche et la main droite.
      *
@@ -47,7 +50,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 2) {
-                if (MovementBasic.isSameFingerBigram(touches.get(0), touches.get(1))) {
+                if (movDelegation.isSameFingerBigram(touches.get(0), touches.get(1))) {
                     sameFinger[0] += ngramme.get(xgramme);
                 }
             }
@@ -65,7 +68,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 2) {
-                if (MovementBasic.is_LSB(touches.get(0), touches.get(1))) {
+                if (movDelegation.is_LSB(touches.get(0), touches.get(1))) {
                     LSB[0] += ngramme.get(xgramme);
                 }
             }
@@ -83,7 +86,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 2) {
-                if (MovementBasic.is_Cissors(touches.get(0), touches.get(1))) {
+                if (movDelegation.is_Cissors(touches.get(0), touches.get(1))) {
                     is_Cissors[0] += ngramme.get(xgramme);
                 }
             }
@@ -101,7 +104,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 2) {
-                if (MovementBasic.is_Switching(touches.get(0), touches.get(1))) {
+                if (movDelegation.is_Switching(touches.get(0), touches.get(1))) {
                     Switch[0] += ngramme.get(xgramme);
                 }
             }
@@ -119,7 +122,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 2) {
-                if (MovementBasic.is_Bearing(touches.get(0), touches.get(1))) {
+                if (movDelegation.is_Bearing(touches.get(0), touches.get(1))) {
                     bearing[0] += ngramme.get(xgramme);
                 }
             }
@@ -137,7 +140,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 3) {
-                if (MovementBasic.is_Redirection(touches.get(0), touches.get(1), touches.get(2))) {
+                if (movDelegation.is_Redirection(touches.get(0), touches.get(1), touches.get(2))) {
                     redirec[0] += ngramme.get(xgramme);
                 }
             }
@@ -155,7 +158,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 3) {
-                if (MovementBasic.worst_Redirection(touches.get(0), touches.get(1), touches.get(2))) {
+                if (movDelegation.worst_Redirection(touches.get(0), touches.get(1), touches.get(2))) {
                     ret[0] += ngramme.get(xgramme);
                 }
             }
@@ -173,7 +176,7 @@ public class KeyboardEvaluator {
         toucheCorrspond.forEach((xgramme, touches) -> {
             int len = touches.size();
             if (len == 3) {
-                if (MovementBasic.is_SKS(touches.get(0), touches.get(1), touches.get(2))) {
+                if (movDelegation.is_SKS(touches.get(0), touches.get(1), touches.get(2))) {
                     ret[0] += ngramme.get(xgramme);
                 }
             }
